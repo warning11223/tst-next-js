@@ -1,0 +1,130 @@
+import {Video} from "@/src/lib/types/video";
+
+const getRandomDate = (daysAgo: number): string => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return date.toISOString();
+};
+
+export const mockVideos: Video[] = [
+    {
+        id: '1',
+        title: 'Введение в TypeScript',
+        author: 'Алексей Иванов',
+        durationSec: 180,
+        publishedAt: getRandomDate(5),
+        thumbnail: 'https://picsum.photos/seed/video1/640/360',
+    },
+    {
+        id: '2',
+        title: 'Next.js App Router: Полное руководство',
+        author: 'Мария Петрова',
+        durationSec: 1800,
+        publishedAt: getRandomDate(15),
+        thumbnail: 'https://picsum.photos/seed/video2/640/360',
+    },
+    {
+        id: '3',
+        title: 'React Hooks за 3 минуты',
+        author: 'Дмитрий Смирнов',
+        durationSec: 195,
+        publishedAt: getRandomDate(30),
+        thumbnail: 'https://picsum.photos/seed/video3/640/360',
+    },
+    {
+        id: '4',
+        title: 'Продвинутые паттерны в React',
+        author: 'Елена Козлова',
+        durationSec: 2400,
+        publishedAt: getRandomDate(45),
+        thumbnail: 'https://picsum.photos/seed/video4/640/360',
+    },
+    {
+        id: '5',
+        title: 'CSS Grid: Быстрый старт',
+        author: 'Игорь Новиков',
+        durationSec: 240,
+        publishedAt: getRandomDate(60),
+        thumbnail: 'https://picsum.photos/seed/video5/640/360',
+    },
+    {
+        id: '6',
+        title: 'Оптимизация производительности веб-приложений',
+        author: 'Ольга Соколова',
+        durationSec: 3600,
+        publishedAt: getRandomDate(2),
+        thumbnail: 'https://picsum.photos/seed/video6/640/360',
+    },
+    {
+        id: '7',
+        title: 'Работа с API в Next.js',
+        author: 'Александр Волков',
+        durationSec: 900,
+        publishedAt: getRandomDate(10),
+        thumbnail: 'https://picsum.photos/seed/video7/640/360',
+    },
+    {
+        id: '8',
+        title: 'Tailwind CSS: Основы за 4 минуты',
+        author: 'Наталья Морозова',
+        durationSec: 250,
+        publishedAt: getRandomDate(20),
+        thumbnail: 'https://picsum.photos/seed/video8/640/360',
+    },
+    {
+        id: '9',
+        title: 'TanStack Query: Управление серверным состоянием',
+        author: 'Сергей Лебедев',
+        durationSec: 1500,
+        publishedAt: getRandomDate(7),
+        thumbnail: 'https://picsum.photos/seed/video9/640/360',
+    },
+    {
+        id: '10',
+        title: 'Accessibility в веб-разработке',
+        author: 'Анна Павлова',
+        durationSec: 2100,
+        publishedAt: getRandomDate(25),
+        thumbnail: 'https://picsum.photos/seed/video10/640/360',
+    },
+    {
+        id: '11',
+        title: 'Git для начинающих',
+        author: 'Максим Федоров',
+        durationSec: 150,
+        publishedAt: getRandomDate(40),
+        thumbnail: 'https://picsum.photos/seed/video11/640/360',
+    },
+    {
+        id: '12',
+        title: 'Микрофронтенды: Архитектура и практика',
+        author: 'Виктория Егорова',
+        durationSec: 4200,
+        publishedAt: getRandomDate(3),
+        thumbnail: 'https://picsum.photos/seed/video12/640/360',
+    },
+    {
+        id: '13',
+        title: 'Server Components в React',
+        author: 'Артем Николаев',
+        durationSec: 1200,
+        publishedAt: getRandomDate(50),
+        thumbnail: 'https://picsum.photos/seed/video13/640/360',
+    },
+    {
+        id: '14',
+        title: 'Docker за 2 минуты',
+        author: 'Ирина Кузнецова',
+        durationSec: 130,
+        publishedAt: getRandomDate(35),
+        thumbnail: 'https://picsum.photos/seed/video14/640/360',
+    },
+    {
+        id: '15',
+        title: 'Тестирование React приложений',
+        author: 'Павел Михайлов',
+        durationSec: 2700,
+        publishedAt: getRandomDate(12),
+        thumbnail: 'https://picsum.photos/seed/video15/640/360',
+    },
+];
