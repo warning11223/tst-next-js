@@ -2,9 +2,20 @@ import { NextResponse } from 'next/server';
 import {VideosResponse} from "@/src/lib/types/video";
 import {mockVideos} from "@/src/lib/data/mockVideos";
 
-export const revalidate = 60;
+// Установил кеширование 0, для отображения ошибки
+export const revalidate = 0;
 
 export async function GET() {
+    // Ошибка 10%
+    const shouldFail = Math.random() < 0.1;
+
+    if (shouldFail) {
+        return NextResponse.json(
+            { message: 'Внутренняя ошибка сервера' },
+            { status: 500 }
+        );
+    }
+
     try {
         await new Promise((resolve) => setTimeout(resolve, 500));
 

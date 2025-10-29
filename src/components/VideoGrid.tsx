@@ -1,20 +1,20 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, FC } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { VideoCard } from './VideoCard';
-
 import { SearchInput } from './SearchInput';
 import { DurationFilter } from './DurationFilter';
+import { EmptyState } from './EmptyState';
+import { useDebounce } from '@/src/hooks/useDebounce';
+import { filterByDuration, filterBySearch, sortByDate } from '@/src/lib/utils/video';
+import { DurationFilterType, Video } from '@/src/lib/types/video';
 
-import { ErrorState } from './ErrorState';
-import {useDebounce} from "@/src/hooks/useDebounce";
-import {useVideos} from "@/src/hooks/useVideos";
-import {filterByDuration, filterBySearch, sortByDate} from "@/src/lib/utils/video";
-import {DurationFilterType} from "@/src/lib/types/video";
-import {VideoSkeleton} from "@/src/components/VideoSkeleton";
+type VideoGridProps = {
+    initialData: Video[];
+};
 
-export const VideoGrid = () => {
+export const VideoGrid: FC<VideoGridProps> = ({ initialData }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -24,8 +24,6 @@ export const VideoGrid = () => {
     );
 
     const debouncedSearch = useDebounce(search, 500);
-
-    const { data, isLoading, isError, refetch } = useVideos();
 
     useEffect(() => {
         const params = new URLSearchParams();
@@ -37,24 +35,18 @@ export const VideoGrid = () => {
     }, [debouncedSearch, duration, router]);
 
     const filteredVideos = useMemo(() => {
-        if (!data?.videos) return [];
-
-        let result = [...data.videos];
+        let result = [...initialData];
         result = sortByDate(result);
         result = filterByDuration(result, duration);
         result = filterBySearch(result, debouncedSearch);
 
         return result;
-    }, [data, duration, debouncedSearch]);
+    }, [initialData, duration, debouncedSearch]);
 
     const handleReset = () => {
         setSearch('');
         setDuration('all');
     };
-
-    if (isError) {
-        return <ErrorState onRetry={() => refetch()} />;
-    }
 
     return (
         <div className="min-h-screen bg-gray-200">
@@ -70,16 +62,8 @@ export const VideoGrid = () => {
                     </div>
                 </header>
 
-                {isLoading ? (
-                    <div className="min-h-screen bg-gray-50">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {Array.from({ length: 9 }).map((_, i) => (
-                                    <VideoSkeleton key={i} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                {filteredVideos.length === 0 ? (
+                    <EmptyState onReset={handleReset} />
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredVideos.map((video) => (
