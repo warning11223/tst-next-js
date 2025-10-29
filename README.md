@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Каталог видео
 
-## Getting Started
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-orange)
+![Next](https://img.shields.io/badge/Next-16.0.0-orange)
+![Tailwind](https://img.shields.io/badge/Tailwind-4.1.16-orange)
 
-First, run the development server:
+## Технологии
 
+- NextJS
+- Typescript
+- Tailwind CSS
+- Tanstack/react-query
+
+## Установка и запуск
+
+1. Клонируйте репозиторий:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/warning11223/tst-next-js
+```
+2. Перейдите в директорию проекта:
+```bash
+cd tst-next-js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Установите зависимости:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Запустите приложение:
+```bash
+npm run dev
+```
+Приложение будет доступно по адресу: http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Что можно улучшить?
+```
+Сортировка:
+Сейчас видео сортируются только по дате (новые сверху). 
+Для реализации дополнительной сортировки я бы добавил dropdown компонент с вариантами: 
+"Дата: новые → старые", "Дата: старые → новые", "Название: А-Я", "Название: Я-А", "Длительность: короткие → длинные", "Длительность: длинные → короткие". 
+В состоянии компонента VideoGrid создал бы новый useState для хранения выбранного типа сортировки (например, 'date-desc' | 'date-asc' | 'title-asc' и т.д.). 
+Добавил бы функцию sortVideos в lib/utils/video.ts, которая принимает массив видео и тип сортировки, а возвращает отсортированный массив через switch-case или объект с функциями сортировки. 
+В useMemo, где происходит фильтрация, добавил бы вызов sortVideos перед фильтрами, чтобы сортировка применялась первой. 
+Выбранный тип сортировки сохранял бы в URL параметры (например, ?sort=title-asc) через useEffect и router.replace, чтобы состояние сохранялось при обновлении страницы.
+Для сортировки по названию использовал бы метод localeCompare с параметром 'ru' для корректной работы с кириллицей. 
+Для дат сравнивал бы через getTime() после преобразования в Date объекты, а для длительности — просто числовое сравнение через durationSec. 
+В UI разместил бы dropdown рядом с фильтром длительности в одной строке на desktop и в отдельной строке на mobile для лучшей адаптивности. 
+Добавил бы визуальный индикатор активной сортировки (иконку стрелки) и счётчик результатов под фильтрами. 
+При изменении сортировки можно добавить плавную анимацию перестроения сетки через CSS transitions или framer-motion для более приятного UX.
+```
