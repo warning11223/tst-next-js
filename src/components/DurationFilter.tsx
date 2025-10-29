@@ -17,9 +17,9 @@ const filterOptions = [
 export const DurationFilter = ({ value, onChange }: DurationFilterProps) => {
     return (
         <div className="flex flex-wrap gap-2">
-      <span className="text-sm text-gray-700 flex items-center">
-        Длительность:
-      </span>
+            <span className="text-sm text-gray-700 flex items-center">
+                Длительность:
+            </span>
             {filterOptions.map((option) => (
                 <button
                     key={option.value}

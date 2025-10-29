@@ -2,10 +2,10 @@
 
 import { useMemo, useState, useEffect, FC } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { VideoCard } from './VideoCard';
-import { SearchInput } from './SearchInput';
+import { VideoCard } from './ui/VideoCard';
+import { SearchInput } from './ui/SearchInput';
 import { DurationFilter } from './DurationFilter';
-import { EmptyState } from './EmptyState';
+import { EmptyState } from './ui/EmptyState';
 import { useDebounce } from '@/src/hooks/useDebounce';
 import { filterByDuration, filterBySearch, sortByDate } from '@/src/lib/utils/video';
 import { DurationFilterType, Video } from '@/src/lib/types/video';

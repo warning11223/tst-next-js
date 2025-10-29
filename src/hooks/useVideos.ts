@@ -11,6 +11,7 @@ const fetchVideos = async (): Promise<VideosResponse> => {
     return response.json();
 };
 
+// Хук для клиента
 export const useVideos = () => {
     return useQuery({
         queryKey: ['videos'],
