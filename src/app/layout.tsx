@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-import {Providers} from "@/src/components/Providers";
-import {ReactNode} from "react";
-
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
+import { Providers } from "@/src/components/Providers";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
     title: 'Каталог видео',
@@ -18,7 +15,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ru">
-        <body className={inter.className}>
+        <body>
         <Providers>{children}</Providers>
         </body>
         </html>
