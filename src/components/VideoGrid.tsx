@@ -39,7 +39,7 @@ export const VideoGrid: FC<VideoGridProps> = ({ initialData }) => {
                 {filteredVideos.length === 0 ? (
                     <EmptyState onReset={resetFilters} />
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 [@media(width>=1200px)]:grid-cols-3">
                         {filteredVideos.map((video) => (
                             <VideoCard key={video.id} video={video} />
                         ))}
