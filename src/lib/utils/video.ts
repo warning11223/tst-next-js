@@ -57,9 +57,8 @@ export const sortByDate = (videos: Video[]): Video[] => {
 };
 
 export async function getVideos() {
-    const res = await fetch('http://localhost:3000/api/videos', {
-        cache: 'no-store',
-    });
+    const baseUrl = process.env.APP_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/videos`);
 
     if (!res.ok) {
         throw new Error('Failed to fetch videos');

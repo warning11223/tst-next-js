@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import {VideosResponse} from "@/src/lib/types/video";
 import {mockVideos} from "@/src/lib/data/mockVideos";
 
-// Установил кеширование 0, для отображения ошибки
-export const revalidate = 0;
-
 export async function GET() {
     // Ошибка 10%
     const shouldFail = Math.random() < 0.1;
@@ -12,7 +9,12 @@ export async function GET() {
     if (shouldFail) {
         return NextResponse.json(
             { message: 'Внутренняя ошибка сервера' },
-            { status: 500 }
+            {
+                status: 500,
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate'
+                }
+            }
         );
     }
 
@@ -25,7 +27,7 @@ export async function GET() {
 
         return NextResponse.json(response, {
             headers: {
-                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
             },
         });
     } catch (error) {
