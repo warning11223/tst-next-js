@@ -1,15 +1,16 @@
-import Link from 'next/link';
+'use client'
 
-export default function VideoDetailPage({
-                                            params,
-                                        }: {
-    params: { id: string };
-}) {
+import Link from 'next/link';
+import {useParams} from "next/navigation";
+
+export default function VideoDetailPage() {
+    const { id } = useParams();
+
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
             <div className="text-center">
                 <h1 className="text-2xl font-bold text-gray-900 mb-4">
-                    Страница видео #{params.id}
+                    Страница видео # {id}
                 </h1>
                 <p className="text-gray-600 mb-6">
                     Здесь будет детальная страница видео
